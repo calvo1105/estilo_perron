@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <script src="jquery317.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        label{
+            text-align: center;
+        }
+        #input_formulario{
+            align-items: center;
+        }
+        .Division{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+        }
+        #fotico{
+            width: 600px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 20px;
+        }
+        .formulario{
+            margin-top: 40px;
+        }
+        #dividir{
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .input_juntos{
+           
+            margin-top: 40px;
+        }
+        #registro{
+            text-align: center;
+            margin-top: 100px;
+        }
+        #registro2{
+            text-align: center;
+            margin-top: 100px;
+            font-size: 50px;
+        }
+        .boton_registro{
+            margin-top: 40px;
+            width: 150px;
+        }
+        .formContent{
+            width: 39%;
+        }
+        #resultado{
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        #resultadoError{
+            background-color: #ad0505;
+            border-color: #000000;
+            color: #ffffff;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        .nav-links{
+            margin-top: 20px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .linknav{
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <nav id="barrita">
+        <div class="logo">
+            <img src="EstiloPerron.jpeg" alt="Logo" id="logo">
+        </div>
+        <div class="nav-links">
+            <a href="#"  id="user"></a>
+            <a href="iniciosesion.html" class="nosesion">Inicia Sesión</a>
+            <a href="registro.html" class="nosesion">Registrate</a>
+            <a href="cesta.html">Mi cesta<span class="badge red" id="items"></span></a>
+            <a href="#" class="isSesion" id="cerrarSesion">Cerrar Sesión</a>
+        </div>
+    </nav>
+    <script src="usuario.js"></script>
+    <header>
+        <h1>Bienvenido a la Tienda de Mascotas</h1>
+        <nav id="cositadearriba">
+            <ul>
+                <li><a href="pagina.html" class="linknav">Inicio</a></li>
+                <li><a href="compra.php" class="linknav">Productos</a></li>
+                <li><a href="servicios.html" class="linknav">Servicios</a></li>
+                <li><a href="#contactanos" class="linknav">Contactanos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1 id="registro2">Descubre como mantener el bienestar de tu mascota con nosotros</h1>
+    <div class="Division">
+        <div>
+            <center><img src="registro.png" alt="Logo" id="fotico"></center>
+        </div>
+        <div>
+            <center>
+                <h1 id="registro">Registrate para estar al día</h1>
+                <h1>con nuestras novedades</h1>
+                <form class="formContent" id="formulario">
+                    <div class="formulario" id="dividir">
+                        <center><input type="Text"  name="nombre" id="nombre" class="input_juntos" placeholder="Nombre*" required></center>
+                        <center><input type="Text" name="apellido" id="apellido" class="input_juntos"  placeholder="Apellido*" required></center>
+                    </div>
+                    <div class="formulario">
+                        <center><input type="email" name="email" id="email" placeholder="Correo*" required></center>
+                    </div>
+                        <div class="formulario">
+                        <center><input type="password" name="pass" id="pass" placeholder="Contraseña*" required></center>
+                    </div>
+                    <div class="formulario">
+                        <label>
+                        Recuerdame </br>
+                        <input type="checkbox" id="input_formulario" name="recordar">
+                        </label>
+                    </div>
+                    <input type="hidden" id="status" name="status" value="cliente">
+                    <center><button type="submit" class="boton_registro">Registrar</button></center>
+                </form>
+            </center>
+        </div>
+    </div>
+    <div id="resultado" style="display: none;"></div>
+    <div id="resultadoError" style="display: none;"></div>
+    <h1 id="registro">Descubre como mantener el bienestar de tu mascota con nosotros</h1>
+    
+    <footer id="contactanos">
+        <p>Síguenos en nuestras redes sociales</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/estiloperron?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><img src="instagram.png" alt="Instagram"></a>
+            <a href="https://www.tiktok.com/@estilo.perron0?_t=8q9aVLftxH4&_r=1" target="_blank"><img src="tiktok.png" alt="TikTok"></a>
+            <a href="https://wa.link/dq5rya" target="_blank"><img src="whatsapp.png" alt="WhatsApp"></a>
+        </div>
+        <p>Encuentranos de otras formas:</p>
+        <p>+57 3186330191</p>
+        <p>Cra 4D #21C-28</p>
+        <p>EstiloperronGabo@gmail.com</p>
+    </footer>
+
+    <script>
+        // Une un controlador de submit(de entrega) al formulario
+        $( "#formulario" ).submit(function( evento ) {
+         
+          // Evita que el formulario se entregue normalmente
+          evento.preventDefault();
+         
+          // Obten algunos valores de elementos en la página:
+          var name = $("#nombre").val(),
+          apellido = $("#apellido").val(),
+          email = $("#email").val(),pass = $("#pass").val(),
+          status =$("#status").val()
+            url = "guardaRegistro.php";
+         
+          // Envía los datos usando post
+          
+          // Función Ajax para enviar una solicitud post
+          $.ajax({
+            type: "POST",
+            url: url,
+            data:{nombre:name,apellido:apellido,email:email,pass:pass,status:status},
+            dataType:"json",
+            success: function(respuesta){
+                $( "#resultado" ).html('')
+                //si la solicitud es hecha éxitosamente entonces la respuesta representa los datos
+               data = JSON.parse(respuesta);    
+               if(data.resp === 'nok'){
+                $( "#resultadoError" ).empty().append( data.msj );
+                $( "#resultadoError" ).css("display","block");
+                $( "#resultado" ).css("display","none");
+               }else{
+                $( "#resultado" ).empty().append( data.msj );
+                resultado.style.display = 'block';
+                $( "#resultadoError" ).css("display","none");
+               }
+                
+               //alert("entro")
+            }
+          });
+          
+        });
+        </script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="jquery317.js"></script>
+    <style>
+        .Division{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            align-content: center;
+            align-items: center;
+        }
+        .boton{
+            display: inline-block;
+            font-size: 1em;
+            background: #d00505;
+            padding: 10px 30px;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 10px;
+            color: #ffffff;
+            transition: 0.2s;
+            max-width: 200px;
+            text-align: center;
+        }
+        .boton:hover{
+            letter-spacing: 3px;
+            background-color: #d00505;
+        }
+        h1{
+            text-align: center;
+        }
+        #contactanos{
+            margin-top: 100px;
+        }
+        .espacio{
+            margin-top: 200px;
+        }
+        #servicios{
+            font-size: 65px;
+            margin-top: 100px;
+            margin-bottom: 70px;
+        }
+        .nav-links{
+            margin-top: 20px;
+        }
+        #modal{
+            width: 400px;
+            height: 400px;
+        }
+        #modal::backdrop{
+            background-color: rgba(0,0,0,.55);
+        }
+        #modal2::backdrop{
+            background-color: rgba(0,0,0,.55);
+        }
+
+        .formulario{
+            max-width: 90%;
+        }
+        .boton_registro{
+            margin-top: 20px;
+        }
+        #resultado{
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        #resultadoError{
+            background-color: #ad0505;
+            border-color: #000000;
+            color: #ffffff;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        #linknav{
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <nav id="barrita">
+        <div class="logo">
+            <img src="EstiloPerron.jpeg" alt="Logo" id="logo">
+        </div>
+        <div class="nav-links">
+            <a href="#"  id="user"></a>
+            <a href="iniciosesion.html" class="nosesion">Inicia Sesión</a>
+            <a href="registro.html" class="nosesion">Registrate</a>
+            <a href="cesta.html" style="position: relative;"></span>Mi cesta<span class="badge red" id="items"></span></a>
+            <a href="#" class="isSesion" id="cerrarSesion" onclick="location.reload()">Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Bienvenido a la Tienda de Mascotas</h1>
+        <nav id="cositadearriba">
+            <ul>
+                <li><a href="pagina.html" id="linknav">Inicio</a></li>
+                <li><a href="compra.php" id="linknav">Productos</a></li>
+                <li><a href="servicios.html" id="linknav">Servicios</a></li>
+                <li><a href="#contactanos" id="linknav">Contactanos</a></li>
+                <li class="reservas"><a href="registroReservas.php" id="linknav"  >Reservas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1 id="servicios">Servicios</h1>
+    <h1>Conoce los servicios que ofrecemos en Estilo Perron</h1>
+        <div class="gallery">
+            <img src="peluqueria.png" alt="Imagen 1" width="600px">
+            <img src="paseos.png" alt="Imagen 2" width="600px">
+            <img src="adiestramiento.png" alt="Imagen 3" width="600px">
+        </div>
+        <div class="Division"><h1>Haz que tu peludo luzca de la mejor manera</h1>
+            <h1>Deja que tu mascota se sienta segura y cómoda con nuestros paseadores</h1>
+            <h1>Permite que tu mascota aprenda con nuestros entrenadores</h1>
+            <center><button class="boton" id="btn-abrir-modal">Reserva ya</button></center>
+            <center><button class="boton" id="btn-abrir-modal2">Reserva ya</button></center>
+            <center><button class="boton" id="btn-abrir-modal3">Reserva ya</button></center>
+        </div>
+        <div id="resultado" style="display: none;"></div>
+        <div id="resultadoError" style="display: none;"></div>
+        <dialog id="modal">
+            <h1>Ingresa los datos para la reserva</h1>
+            <form method="dialog" id="formulario">
+                <div class="formulario">
+                    <label for="">Fecha</label>
+                    <center><input type="date" name="fecha" id="fecha" required></center>
+                </div>
+                <div class="formulario">
+                    <label for="">Hora</label>
+                    <center><input type="time" name="hora" id="hora" required></center>
+                </div>
+                <div class="formulario">
+                    <label for="">Nombre del dueño de la mascota</label>
+                    <center><input type="text" name="nombre" id="nombre" placeholder="nombre*" required></center>
+                </div>
+                <input type="hidden" id="tipo" name="tipo">
+                <input type="hidden" id="idUser" name="idUser">
+                <center><button type="submit" class="boton_registro">Reservar cita</button></center>
+            </form>
+            <center><button class="boton" id="btn-cerrar-modal">Cerrar</button></center>
+        </dialog>
+        <dialog id="modal2">
+            <h1>Inicia sesión primero</h1>
+            <center><button class="boton" id="btn-cerrar-modal2">Cerrar</button></center>
+        </dialog>
+    <script>
+        const btnAbrirModal=document.querySelector("#btn-abrir-modal");
+        const btnAbrirModal2=document.querySelector("#btn-abrir-modal2");
+        const btnAbrirModal3=document.querySelector("#btn-abrir-modal3");
+        const btnCerrarModal=document.querySelector("#btn-cerrar-modal")
+        const btnCerrarModal2=document.querySelector("#btn-cerrar-modal2")
+        const modal=document.querySelector("#modal");
+        const modal2=document.querySelector("#modal2");
+
+        btnAbrirModal.addEventListener("click",()=>{
+            if(islogin=='true'){
+                modal.showModal();
+                $("#tipo").val("peluqueria");
+                $("#idUser").val(idUser);
+                btnCerrarModal.addEventListener("click",()=>{
+                    modal.close();
+                })
+            }else{
+                modal2.showModal();
+                btnCerrarModal2.addEventListener("click",()=>{
+                    modal2.close();
+                })
+            }
+        })
+        btnAbrirModal2.addEventListener("click",()=>{
+            if(islogin=='true'){
+                modal.showModal();
+                $("#tipo").val("paseo");
+                $("#idUser").val(idUser);
+                btnCerrarModal.addEventListener("click",()=>{
+                    modal.close();
+                })
+            }else{
+                modal2.showModal();
+                btnCerrarModal2.addEventListener("click",()=>{
+                    modal2.close();
+                })
+            }
+        })
+        btnAbrirModal3.addEventListener("click",()=>{
+            if(islogin=='true'){
+                modal.showModal();
+                $("#tipo").val("adiestramiento");
+                $("#idUser").val(idUser);
+                btnCerrarModal2.addEventListener("click",()=>{
+                    modal.close();
+                })
+            }else{
+                modal2.showModal();
+                btnCerrarModal.addEventListener("click",()=>{
+                    modal2.close();
+                })
+            }
+        })
+        // Une un controlador de submit(de entrega) al formulario
+        $( "#formulario" ).submit(function( evento ) {
+         
+         // Evita que el formulario se entregue normalmente
+         evento.preventDefault();
+        
+         // Obten algunos valores de elementos en la página:
+         var fecha = $("#fecha").val(),
+         hora = $("#hora").val(),
+         tipo = $("#tipo").val(),idUser = $("#idUser").val(),
+           url = "guardaReservas.php";
+        
+         // Envía los datos usando post
+         
+         // Función Ajax para enviar una solicitud get
+         $.ajax({
+           type: "POST",
+           url: url,
+           data:{fecha:fecha,hora:hora,tipo:tipo,idUser:idUser},
+           dataType:"json",
+           success: function(respuesta){
+               $( "#resultado" ).html('')
+               //si la solicitud es hecha éxitosamente entonces la respuesta representa los datos
+              data = JSON.parse(respuesta);    
+              if(data.resp === 'nok'){
+               $( "#resultadoError" ).empty().append( data.msj );
+               $( "#resultadoError" ).css("display","block");
+               $( "#resultado" ).css("display","none");
+              }else{
+               $( "#resultado" ).empty().append( data.msj );
+               resultado.style.display = 'block';
+               $( "#resultadoError" ).css("display","none");
+              }
+               
+              //alert("entro")
+           }
+         });
+         
+       });
+    </script>
+
+    <h1 class="espacio">Se parte de nuestro equipo de paseadores</h1>
+    <center><a href="https://docs.google.com/forms/d/e/1FAIpQLSfaIfNUTJdI-AqaMHEOk2O6Ag02FGv_T-GJQGYxZdOUJvF_gA/viewform?usp=sf_link" class="boton" target="_blank">Ingresa aqui</a></center>
+
+    <footer id="contactanos">
+        <p>Síguenos en nuestras redes sociales</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/estiloperron?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><img src="instagram.png" alt="Instagram"></a>
+            <a href="https://www.tiktok.com/@estilo.perron0?_t=8q9aVLftxH4&_r=1" target="_blank"><img src="tiktok.png" alt="TikTok"></a>
+            <a href="https://wa.link/dq5rya" target="_blank"><img src="whatsapp.png" alt="WhatsApp"></a>
+        </div>
+        <p>Encuentranos de otras formas:</p>
+        <p>+57 3186330191</p>
+        <p>Cra 4D #21C-28</p>
+        <p>EstiloperronGabo@gmail.com</p>
+    </footer>
+    <script src="usuario.js"></script>
+</body>
+</html>
